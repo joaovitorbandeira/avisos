@@ -1,13 +1,7 @@
 import { randomBytes } from "node:crypto";
 
 export default {
-  posts: [
-    {
-      id: "fhasuhfuias",
-      title: "Testando",
-      description: "Descrição teste",
-    },
-  ],
+  posts: [],
   getAll() {
     return this.posts;
   },
