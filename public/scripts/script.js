@@ -15,15 +15,20 @@ function updatePosts() {
           <div class="card-header">
             <h5 class="card-title">${post.title}</h5>
           </div>
-          <div class="card-body">
+          <div class="card-body d-flex justify-content-between">
             <div class="card-text">${post.description}</div>
+              <div>
+                <button class="btn btn-danger btn-sm" onclick="deletePost('${post.id}')">
+                  <i class="bi bi-trash"></i> Deletar
+                </button>
+              </div>
           </div>
         </div>`;
 
         postElements += postElement;
       });
 
-      document.getElementById("posts").innerHTML = postElements;
+      document.getElementById("postsContainer").innerHTML = postElements;
     });
 }
 
@@ -45,4 +50,25 @@ function newPost() {
     document.getElementById("title").value = "";
     document.getElementById("description").value = "";
   });
+}
+
+function deletePost(id) {
+  if (confirm("Tem certeza que deseja deletar este post?")) {
+    const options = {
+      method: "DELETE",
+    };
+
+    fetch(`http://192.168.1.64:3000/api/delete/${id}`, options)
+      .then((res) => {
+        if (res.ok) {
+          console.log("Post deletado com sucesso");
+          updatePosts();
+        } else {
+          console.error("Erro ao deletar post");
+        }
+      })
+      .catch((err) => {
+        console.error("Erro:", err);
+      });
+  }
 }

@@ -9,5 +9,13 @@ export default {
     let id = `post-${randomBytes(4).toString("hex")}`;
     this.posts.push({ id, title, description });
   },
-  deletePost(id) {},
+  deletePost(id) {
+    const index = this.posts.findIndex((post) => post.id === id);
+    if (index !== -1) {
+      console.log(index);
+      this.posts.splice(index, 1);
+      return true;
+    }
+    return false;
+  },
 };
