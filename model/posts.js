@@ -12,7 +12,6 @@ export default {
   deletePost(id) {
     const index = this.posts.findIndex((post) => post.id === id);
     if (index !== -1) {
-      console.log(index);
       this.posts.splice(index, 1);
       return true;
     }
